@@ -1,0 +1,18 @@
+name: 03 - using - actions
+
+on: push
+
+jobs:
+  ubuntu-echo:
+    runs-on: ubuntu-latest
+
+    # 0. checkout code from repository
+    # 1. install app deps
+    # 2. run automated tests
+
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+      - name: printing folders
+        run: ls
+  
