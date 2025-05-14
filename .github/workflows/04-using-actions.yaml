@@ -1,6 +1,6 @@
 name: 04 - using - actions
 
-on: push
+on: workflow_dispatch
 
 jobs:
   ubuntu-echo:
