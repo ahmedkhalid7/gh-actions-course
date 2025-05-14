@@ -5,6 +5,9 @@ on: push
 jobs:
   ubuntu-echo:
     runs-on: ubuntu-latest
+    defaults:
+        run:
+            working-directory: 04-using-actions/react-app
 
     # 0. checkout code from repository
     # 1. install app deps
@@ -19,4 +22,5 @@ jobs:
           node-version: '20.x'
       - name: install dependancies
         run: npm ci
-        working-directory: 04-using-actions/react-app
+      - name: run unit tests
+        run: npm run test
