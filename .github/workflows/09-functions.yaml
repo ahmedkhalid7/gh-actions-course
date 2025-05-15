@@ -3,11 +3,21 @@ name: 09 - functions
 on: 
     pull_request:
     workflow_dispatch:
-        
+
 jobs:
   echo1:
     runs-on: ubuntu-latest
     steps:
+        - name: print PR title
+          run: echo "${{ github.event.pull_request.title }}"
+        - name: print PR labels
+          run: |
+            cat << EOF
+            ${{ toJson(github.event.pull_request.labels) }}      
+            EOF
+        - name: bug step
+          if: ${{ !cancelled() && contains(github.event.pull_request.title, 'fix') }}
+          run: echo "i am a bug fix"
         - name: failing step
           run: exit 1
         - name: i will be skipped
