@@ -21,7 +21,7 @@ on:
                 description: release from which to build and deploy
 
 jobs:
-    echo: 
+    build: 
         runs-on: ubuntu-latest
         steps:
             - name: build
@@ -30,6 +30,7 @@ jobs:
         runs-on: ubuntu-latest
         if: ${{ !inputs.dry-run }}
         environment: ${{ inputs.target }}
+        needs: build
         steps:
             - name: deploy
               run: echo "deploying to ${{ inputs.target }}"
