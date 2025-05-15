@@ -1,4 +1,4 @@
-name: 10 controling execution flow
+name: 10 - controling execution flow
 
 on: 
     workflow_dispatch:
@@ -50,3 +50,8 @@ jobs:
         steps:
           - name: deploying to prod
             run: echo "deplying app to production...."
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - name: test
+              run: echo "testing"
