@@ -1,0 +1,46 @@
+name: 14 - working with artifacts
+
+on: 
+    workflow_dispatch 
+
+jobs:
+    test-build:
+        runs-on: ubuntu-latest
+        defaults:
+            run: 
+                working-directory: 14-artifacts/react-app
+        steps:
+            - name: checkout code
+              run: actions/checkout@v4
+            - name: setup node
+              uses: actions/setup-node@v3
+              with: 
+                node-version: '20.x'
+            - name: download cached dependencies
+              uses: actions/cache@v3
+              id: cache
+              with:
+                path: 14-artifacts/react-app/node_modules
+                key: deps-node-modules-${{ hashFiles('13-caching/react-app/package-lock.json') }}
+            - name: install dependencies
+              if: steps.cache.outputs.cache-hit != 'true'
+              run: npm ci
+            - name: unit tests 
+              run: npm run test
+            - name: build code
+              run: npm run build
+            - name: upload build files
+              uses: actions/upload-artifact@v3
+              with:
+                name: app
+                path: 14-artifacts/react-app/build
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: download build artifact
+              uses: actions/download-artifact@v3
+              with:
+                name: app
+                path: build
+            - name: show folder structure
+              run: ls -R
