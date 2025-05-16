@@ -10,46 +10,38 @@ jobs:
             run: 
                 working-directory: 14-artifacts/react-app
         steps:
-            - name: Checkout code
-              uses: actions/checkout@v4  # Fixed: uses instead of run
-            
-            - name: Setup Node
+            - name: checkout code
+              run: actions/checkout@v4
+            - name: setup node
               uses: actions/setup-node@v3
               with: 
                 node-version: '20.x'
-            
-            - name: Download cached dependencies
+            - name: download cached dependencies
               uses: actions/cache@v3
               id: cache
               with:
-                path: node_modules  # Fixed: relative to working-directory
-                key: deps-node-modules-${{ hashFiles('14-artifacts/react-app/package-lock.json') }}  # Fixed path
-            
-            - name: Install dependencies
+                path: 14-artifacts/react-app/node_modules
+                key: deps-node-modules-${{ hashFiles('13-caching/react-app/package-lock.json') }}
+            - name: install dependencies
               if: steps.cache.outputs.cache-hit != 'true'
               run: npm ci
-            
-            - name: Run unit tests 
+            - name: unit tests 
               run: npm run test
-            
-            - name: Build code
+            - name: build code
               run: npm run build
-            
             - name: Upload build files
-              uses: actions/upload-artifact@v3  # Added version tag
+              uses: actions/upload-artifact@v4
               with:
                 name: app
-                path: build  # Fixed: relative to working-directory
-
+                path: 14-artifacts/react-app/build
     deploy:
         runs-on: ubuntu-latest
         needs: test-build
         steps:
-            - name: Download build artifact
-              uses: actions/download-artifact@v3  # Added version tag
+            - name: download build artifact
+              uses: actions/download-artifact@v4
               with:
                 name: app
                 path: build
-            
-            - name: Show folder structure
+            - name: show folder structure
               run: ls -R
