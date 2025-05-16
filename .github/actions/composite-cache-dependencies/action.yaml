@@ -30,6 +30,6 @@ runs:
             key: node-modules-${{inputs.target-env}}-${{ hashFiles(format('{0}/{1}', inputs.working-dir, 'package-lock.json')) }}
         - name: install dependencies
           if: steps.cache.outputs.cache-hit != 'true'
-          run: ${{ inputs.target-env == 'dev' && 'npm ci' || 'npm ci --omit="dev'}}
+          run: ${{ inputs.target-env == 'dev' && 'npm ci' || 'npm ci --omit=dev'}}
           shell: bash
           working-directory: ${{inputs.working-dir}}
