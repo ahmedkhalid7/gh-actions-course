@@ -25,13 +25,8 @@ jobs:
               uses: actions/setup-node@v3
               with: 
                 node-version: ${{ matrix.node-version }}
-            - name: fail if experimental
-              if: matrix.tag == 'experimental'
-              run: exit 1
             - name: perform some tests
-              run: |
-                echo "running some tests on OS ${{matrix.os}} and NodeJS ${{matrix.node-version}}"
-                sleep 10
+              run: echo "running some tests on OS ${{matrix.os}} and NodeJS ${{matrix.node-version}}"
             - name: upload test results
               run: echo "uploading test results..."
     include-example:
@@ -43,13 +38,19 @@ jobs:
                 shape: [circle, square]
                 size: [small, large]
                 include:
-                    - opacity: 50
                     - color: red
                       opacity: 75
                     - shape: circle
                       opacity: 100
                     - color: red
                       shape: triangle
+                    - opacity: 50
+                    - color: green
+                      shape: circle
+                      size: medium
+                exclude:
+                    - color: green
+                      shape: circle
         steps:
             - name: dummy step
               run: echo "${{matrix.color}}-${{matrix.shape}}-${{matrix.size}}-${{matrix.opacity}}"
