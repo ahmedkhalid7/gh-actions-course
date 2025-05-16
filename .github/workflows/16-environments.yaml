@@ -19,7 +19,7 @@ jobs:
         steps:
             - name: e2e tests
               run: echo "running e2e"
-    deploy-prod:
+    deploy-prod-frontend:
         runs-on: ubuntu-latest
         needs: e2e-tests
         environment: prod
@@ -28,4 +28,24 @@ jobs:
         steps:
             - name: echo vars
               run: |
-                echo "deploying to production"
+                echo "deploying to frontend"
+    deploy-prod-backend1:
+        runs-on: ubuntu-latest
+        needs: e2e-tests
+        environment: prod
+        env:
+            my-env-value: ${{vars.MY_ENV_VALUE || 'default_value' }}
+        steps:
+            - name: echo vars
+              run: |
+                echo "deploying to backend 1"
+    deploy-prod-backend2:
+        runs-on: ubuntu-latest
+        needs: e2e-tests
+        environment: prod
+        env:
+            my-env-value: ${{vars.MY_ENV_VALUE || 'default_value' }}
+        steps:
+            - name: echo vars
+              run: |
+                echo "deploying to backend 2"
