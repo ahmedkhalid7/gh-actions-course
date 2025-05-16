@@ -29,10 +29,10 @@ jobs:
               run: npm run test
             - name: build code
               run: npm run build
-            - name: upload build files
+            - name: Upload build files
               uses: actions/upload-artifact@v3
               with:
-                name: app
+                name: app-build
                 path: 14-artifacts/react-app/build
     deploy:
         runs-on: ubuntu-latest
