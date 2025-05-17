@@ -16,9 +16,10 @@ inputs:
       required: false
 
 outputs:
-  insalled-deps:
+  installed-deps:
     description: whenter dependencies were installed or not
     value: ${{ steps.cache.outputs.cache-hit != true }}
+
 runs:
     using: composite
     steps:
