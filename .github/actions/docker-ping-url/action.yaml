@@ -16,4 +16,4 @@ inputs:
 
 runs:
   using: docker 
-  image: Dockerfilw
+  image: Dockerfile
