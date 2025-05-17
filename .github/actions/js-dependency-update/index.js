@@ -116,9 +116,9 @@ async function run() {
     } else {
         logger.info('No updates at this pont in time.')
     }
-    
+
     logger.debug(`setting updates-available output to ${updatesAvailable}`);
-    core.setOutputI('updates-available', updatesAvailable);
+    core.setOutput('updates-available', updatesAvailable);
     
       /*
   [DONE] 1. Parse inputs:
