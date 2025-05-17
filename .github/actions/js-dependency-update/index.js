@@ -66,7 +66,7 @@ async function run() {
 
         try {
             await octokit.rest.pulls.create({
-                ownder: github.context.repo.owner,
+                owner: github.context.repo.owner,
                 repo: github.context.repo.repo,
                 title: 'Update NPM dependencies',
                 body: 'This pull request updates NPM packages',
