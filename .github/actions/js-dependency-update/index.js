@@ -50,7 +50,7 @@ async function run() {
             ...commonExecOpts,
         });
 
-        await exec.exec(`git add package.json and package-lock.json`, [], {
+        await exec.exec(`git add package.json package-lock.json`, [], {
             ...commonExecOpts,
         });
 
