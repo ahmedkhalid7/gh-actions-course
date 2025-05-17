@@ -69,7 +69,9 @@ async function run() {
         ...commonExecOpts
     });
 
+    let updatesAvailable = false;
     if (gitStatus.stdout.length > 0){
+        updatesAvailable = true;
         logger.debug(`there are updates available!`)        
         logger.debug(`setting up git`)
         await setupGit();
@@ -114,7 +116,10 @@ async function run() {
     } else {
         logger.info('No updates at this pont in time.')
     }
-
+    
+    logger.debug(`setting updates-available output to ${updatesAvailable}`);
+    core.setOutputI('updates-available', updatesAvailable);
+    
       /*
   [DONE] 1. Parse inputs:
     1.1 base-branch from which to check for updates
