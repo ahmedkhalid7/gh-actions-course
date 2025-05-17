@@ -1,19 +1,24 @@
-FROM python:alpine3.20
+FROM python:3.10-slim
 
 WORKDIR /app
 
-COPY requirements.txt .
-
-# Install system dependencies (using apk instead of apt)
-RUN apk add --no-cache \
-    cairo-dev \
-    pkgconfig \
-    python3-dev \
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
     gcc \
-    musl-dev
+    python3-dev \
+    libffi-dev \
+    libssl-dev \
+    libxml2-dev \
+    libxslt1-dev \
+    libcurl4-openssl-dev \
+    libdbus-1-dev \
+    libglib2.0-dev \
+    && rm -rf /var/lib/apt/lists/*
 
-# Upgrade pip and install Python dependencies
-RUN pip install --upgrade pip setuptools wheel packaging
+# Upgrade pip first
+RUN pip install --upgrade pip setuptools wheel
+
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
