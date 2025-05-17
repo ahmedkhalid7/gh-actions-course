@@ -4,11 +4,18 @@ WORKDIR /app
 
 COPY requirements.txt .
 
-RUN python3 -V
-RUN apt install libcairo2-dev pkg-config python3-dev
+# Install system dependencies (using apk instead of apt)
+RUN apk add --no-cache \
+    cairo-dev \
+    pkgconfig \
+    python3-dev \
+    gcc \
+    musl-dev
+
+# Upgrade pip and install Python dependencies
 RUN pip install --upgrade pip setuptools wheel packaging
-RUN pip install --no-cache-dir -r requirements.txt 
+RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . . 
+COPY . .
 
-CMD ["python3", "/app/main.py"]
+CMD ["python", "/app/main.py"]
