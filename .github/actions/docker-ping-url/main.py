@@ -2,7 +2,7 @@ import os
 import requests
 import time
 
-def website_reacable(url, delay, max_trials):
+def ping_url(url, delay, max_trials):
     trials = 0
     while trials < max_trials:
         try:
@@ -30,6 +30,6 @@ def run():
         raise Exception(f"website {website_url} is malformed or unreacable")
 
     print(f"website {website_url} is reacable")
-    
+
 if __name__ == "__main__":
     run()
