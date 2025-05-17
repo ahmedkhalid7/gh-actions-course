@@ -1,5 +1,5 @@
-ansible==10.5.0
-ansible-core==2.17.5
+ansible==9.10.0
+ansible-core==2.12.0
 apache-libcloud==3.2.0
 argcomplete==1.8.1
 attrs==21.2.0
@@ -7,7 +7,6 @@ Automat==20.2.0
 Babel==2.8.0
 bcrypt==3.2.0
 blinker==1.4
-boto==2.49.0
 boto3==1.20.34
 botocore==1.23.34
 certifi==2020.6.20
@@ -41,6 +40,7 @@ lazr.restfulclient==0.14.4
 lazr.uri==1.0.6
 lockfile==0.12.2
 MarkupSafe==2.0.1
+meson==1.8.0
 more-itertools==8.10.0
 netaddr==0.8.0
 netifaces==0.11.0
