@@ -1,0 +1,19 @@
+name: Ping URL
+description: Ping URL until maximum trials have exceeded. If result is not 200 until then, fails the action.
+
+inputs:
+  url: 
+    description: URL to Ping
+    required: true 
+  max_trials:
+    description: maximum number of trials unitl action fails 
+    default: '10'
+    required: false 
+  delay:
+    description: delay in seconds between trials 
+    default: '5'
+    required: false
+
+runs:
+  using: docker 
+  image: Dockerfilw
