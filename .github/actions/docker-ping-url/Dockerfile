@@ -1,14 +1,20 @@
-FROM python
+FROM python:3.10-slim  # Explicit version recommended
 
 WORKDIR /app
 
-COPY requirements.txt .
+# First upgrade pip and install system dependencies
+RUN apt-get update && apt-get install -y \
+    libcairo2-dev \
+    pkg-config \
+    python3-dev \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN python -V
-RUN apt install libcairo2-dev pkg-config python3-dev
 RUN pip install --upgrade pip setuptools wheel packaging
-RUN pip install --no-cache-dir -r requirements.txt 
 
-COPY . . 
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-CMD ["python", "/app/main.py"]
+COPY . .
+
+CMD ["python3", "/app/main.py"]
