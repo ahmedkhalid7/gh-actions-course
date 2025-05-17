@@ -46,7 +46,7 @@ async function run() {
         core.info(`[js-dependency-update] : there are updates available!`)
         await exec.exec(`git config --global user.name "gh-automation`);
         await exec.exec(`git config --global user.email "gh-automation@email.com`);
-        await exec.exec(`git checkout -b ${target-branch}`, [], {
+        await exec.exec(`git checkout -b ${targetBranch}`, [], {
             ...commonExecOpts,
         });
 
