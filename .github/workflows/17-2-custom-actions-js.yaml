@@ -36,4 +36,4 @@ jobs:
                 debug: ${{inputs.debug}}
             - name: print custom action output
               run: |
-                echo "updates available: ${{steps.update-deps.outputs.update-available}}"
+                echo "updates available: ${{steps.update-deps.outputs.updates-available}}"
