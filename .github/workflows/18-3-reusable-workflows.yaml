@@ -10,3 +10,5 @@ jobs:
             target-directory: dummy-dir
     e2e-tests:
         uses: ahmedkhalid7/github-actions-course-example-e2e/.github/workflows/e2e.yaml@main
+        secrets:
+            access-token: ${{secrets.GH_TOKEN}}
