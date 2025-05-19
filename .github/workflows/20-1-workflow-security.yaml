@@ -1,0 +1,21 @@
+name: 20 - workflow security 
+
+on: 
+    pull_request:
+
+jobs:
+    unsafe-pr: 
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout code 
+              uses: actions/checkout@v4
+            - name: check pr title
+              run: |
+                echo "title=${{github.event.pull_request.title}}"
+                if [[ $title =~ ^feat ]]; then
+                    echo "pr is a feature"
+                    exit 0
+                else
+                    echo "pr is not a feature"
+                    exit 1
+                fi
